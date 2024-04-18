@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS db_test;
+USE db_test;
+CREATE TABLE IF NOT EXISTS customer (
+    cust_id INT PRIMARY KEY,
+    name VARCHAR(255)
+);
