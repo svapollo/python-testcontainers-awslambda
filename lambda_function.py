@@ -47,17 +47,6 @@ def connect_to_database():
         raise e
 
 
-def lambda_handler(event, context):
-    conn = connect_to_database()
-    try:
-        message = event['Records'][0]['body']
-        insert_data(conn, message)
-    except Exception as e:
-        raise e
-    finally:
-        conn.close()
-
-
 def insert_data(conn, message):
     data = json.loads(message)
     cust_id = data['cust_id']
@@ -71,3 +60,14 @@ def insert_data(conn, message):
     conn.commit()
 
     return "Added %d items to RDS for MySQL table" %(item_count)
+
+
+def lambda_handler(event, context):
+    conn = connect_to_database()
+    try:
+        message = event['Records'][0]['body']
+        insert_data(conn, message)
+    except Exception as e:
+        raise e
+    finally:
+        conn.close()
